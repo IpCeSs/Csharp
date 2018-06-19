@@ -35,7 +35,7 @@ namespace helloWorld
 
         // (ReadLine() > lit les entrées clavier >> console.ReadLine() )
         //le do while ci dessous indique que tant que l'utilisateur ne tape pas "exit" + ENTER
-        //On affiche le le message correspodant 
+        //On affiche le le message correspondant 
         public void GetHelloMessage()
         {
             do
