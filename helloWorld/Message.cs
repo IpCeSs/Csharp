@@ -9,6 +9,21 @@ namespace helloWorld
 {
     class Message
     {
+        
+
+        /**
+               * pour tester le bon fonctionnement on crée une nouvelle 
+               * instance de DateTtime à laquelle on donne une date en dur
+               * par exemple jour un weekend
+               *  DateTime dtNow = new DateTime(2018, 6, 17);
+               *  On remplacerait alors DateTime.Now par dtNow dans les ifs / else 
+               * 
+               * */
+
+        // (ReadLine() > lit les entrées clavier >> console.ReadLine() )
+        //le do while ci dessous indique que tant que l'utilisateur ne tape pas "exit" + ENTER
+        //On affiche le le message correspondant 
+
         private int AM;
         private int PM;
         private int night;
@@ -16,67 +31,41 @@ namespace helloWorld
         /**
          * COnstructeur qui initialise l'objet avec des valeurs par défaut
          * */
-        public Message()
+        public Message(int AM =9, int PM=13, int night=18)
         {
-            AM = 9;
-            PM = 13;
-            night = 18;
+            this.AM=AM;
+            this.PM=PM;
+            this.night=night;
         }
 
-        /**
-               * pour tester le bon fonctionnement on crée une nouvelle 
-               * instance de DateTtime à laquelle on donne une date en dur
-               * par exemple jour un weekend
-               *  DateTime dt = new DateTime(2018, 6, 17);
-               *  On remplacerait alors DateTime.Now par dt dans les ifs / else 
-               * 
-               * */
-        //{0} {1} {2} {3}  {5} {6}correspont dans l'ordre à DateTime.Now.DayOfWeek, DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, DateTime.Now.Hour, DateTime.Now.Minute
-
-        // (ReadLine() > lit les entrées clavier >> console.ReadLine() )
-        //le do while ci dessous indique que tant que l'utilisateur ne tape pas "exit" + ENTER
-        //On affiche le le message correspondant 
-        public void GetHelloMessage()
+        public String GetHelloMessage()
         {
-            do
-            {
-                if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
+            DateTime dtTest = new DateTime(2018, 6, 18, 10, 0, 0);
+            DateTime dtNow = DateTime.Now;
+            
+                if (dtNow.DayOfWeek == DayOfWeek.Saturday 
+                    || dtNow.DayOfWeek == DayOfWeek.Sunday 
+                    || dtNow.DayOfWeek == DayOfWeek.Monday && dtNow.Hour < AM 
+                    || dtNow.DayOfWeek == DayOfWeek.Friday && dtNow.Hour > night)
                 {
-                    BonWE();
+                   return "Bon weekend";
                 }
-                else
-                {
-                    if (DateTime.Now.DayOfWeek == DayOfWeek.Monday && DateTime.Now.Hour < AM || DateTime.Now.DayOfWeek == DayOfWeek.Friday && DateTime.Now.Hour > night)
-                    {
-                        BonWE();
-                    }
-                    else
-                    {
-                        if (DateTime.Now.Hour < AM && DateTime.Now.Hour > night)
+                else if (dtNow.Hour < AM && dtNow.Hour > night)
                         {
-                            Bonsoir();
-                        }
-                        else
-                        {
-                            if (DateTime.Now.Hour > AM && DateTime.Now.Hour < PM)
-                            {
-                                Bonjour();
-                            }
-                            else
-                            {
-                                BonAprem();
-                            }
-                        }
-                    }
-
-                    ReadKey();
+                            return "Bonsoir" ;
                 }
-            } while (ReadLine() != "exit");
+                 else if (dtNow.Hour >= AM && dtNow.Hour <= PM)
+                         {
+                          return "Bon matin";
+                 }
+                  else
+                      {
+                       return "Bon après midi";
+                  }
+          
         }
 
-        
-
-        public void Bonjour()
+      /**  public void Bonjour()
         {
             WriteLine("Bonjour " + Environment.UserDomainName);
         }
@@ -94,6 +83,6 @@ namespace helloWorld
         public void BonWE()
         {
             WriteLine("Bon week-end  " + Environment.UserDomainName);
-        }
+        }*/
     }
 }
